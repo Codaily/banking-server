@@ -18,9 +18,7 @@ import java.sql.Timestamp;
 public class AccountInfo {
 
     @Id
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="account_number")
-    private Account accountNumber;
+    private String accountNumber;
 
     @Column(nullable = false, length = 100)
     private String groupAccountNumber;
@@ -34,7 +32,7 @@ public class AccountInfo {
     @UpdateTimestamp
     private Timestamp updatedAt;
 
-    @Builder AccountInfo(Account accountNumber, String groupAccountNumber, BigInteger balance) {
+    @Builder AccountInfo(String accountNumber, String groupAccountNumber, BigInteger balance) {
         this.accountNumber = accountNumber;
         this.groupAccountNumber = groupAccountNumber;
         this.balance = balance;
