@@ -16,6 +16,9 @@ import java.sql.Timestamp;
 public class Account {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(nullable = false, length = 100)
     private String accountNumber;
 
@@ -35,10 +38,11 @@ public class Account {
     @UpdateTimestamp
     private Timestamp updatedAt;
 
-    @Builder Account(String accountNumber, User userId, String accountPassword){
+    @Builder Account(String accountNumber, User userId, String accountPassword, String authority){
         this.accountNumber = accountNumber;
         this.userId = userId;
         this.accountPassword = accountPassword;
+        this.authority = authority;
     }
 
 }
