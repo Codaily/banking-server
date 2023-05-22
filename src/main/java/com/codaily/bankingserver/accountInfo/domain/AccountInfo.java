@@ -18,7 +18,6 @@ import java.sql.Timestamp;
 public class AccountInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String accountNumber;
 
     @Column(nullable = false, length = 100)
