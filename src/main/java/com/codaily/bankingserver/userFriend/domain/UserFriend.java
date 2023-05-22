@@ -1,5 +1,6 @@
 package com.codaily.bankingserver.userFriend.domain;
 
+import com.codaily.bankingserver.user.domain.User;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,19 +18,19 @@ public class UserFriend{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
-    private Long userId;
-    @Column(nullable = false)
-    private Long friendId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
+    private User userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="friend_id")
+    private User friendId;
     @CreationTimestamp
     private Timestamp createdAt;
-
     @UpdateTimestamp
     private Timestamp updatedAt;
 
     @Builder
-    public UserFriend(Long userId, Long friendId) {
+    public UserFriend(User userId, User friendId) {
         this.userId = userId;
         this.friendId = friendId;
     }
