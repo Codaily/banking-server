@@ -1,5 +1,7 @@
 package com.codaily.bankingserver.user.controller;
 
+
+import com.codaily.bankingserver.global.response.ErrorResponse;
 import com.codaily.bankingserver.user.dto.JoinRequestDto;
 import com.codaily.bankingserver.user.vo.JoinResponseVo;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -8,7 +10,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
