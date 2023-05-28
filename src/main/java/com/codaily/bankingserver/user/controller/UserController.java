@@ -1,8 +1,14 @@
 package com.codaily.bankingserver.user.controller;
 
 import com.codaily.bankingserver.user.dto.JoinRequestDto;
+import com.codaily.bankingserver.user.vo.JoinResponseVo;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,23 +25,15 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-    @Operation(summary = "회원 가입")
-    @Parameter(name="str")
+
     @PostMapping({ "/join" })
-//    public SuccessResponse join(@Valid @RequestBody final JoinRequestDto requestDto) {
-//        userService.join(requestDto);
-//        SuccessResponse res = SuccessResponse.builder()
-//                .status(StatusEnum.OK)
-//                .message("Success Join")
-//                .build();
-//        return res;
-//    }
-    public JoinRequestDto join(@Valid @RequestBody final JoinRequestDto requestDto) {
-        userService.join(requestDto);
-//        SuccessResponse res = SuccessResponse.builder()
-//                .status(StatusEnum.OK)
-//                .message("Success Join")
-//                .build();
-        return requestDto;
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "회원가입 성공", content = @Content(schema = @Schema(implementation = JoinResponseVo.class))),
+            @ApiResponse(responseCode = "404", description = "존재하지 않는 리소스 접근", content = @Content(schema = @Schema(implementation = ErrorResponse.class))) })
+    @Operation(summary = "회원 가입", description = "id와 password를 통해 회원가입을 진행합니다.")
+    @Parameter(name="str")
+
+    public JoinResponseVo join(@Valid @RequestBody final JoinRequestDto requestDto) {
+        return userService.join(requestDto);
     }
 }
